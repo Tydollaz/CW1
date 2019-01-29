@@ -62,38 +62,74 @@ public class ImageManipulation {
        BufferedImage temp = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
        (temp.getGraphics()).drawImage(image, 0, 0, image.getWidth(), image.getHeight(),null);
 
+       int I,J,X,Y;
+
 // ----- template code commented out BEGIN     
 
 // check if A(x,y) lies within image
 if (x >= 0 && x < image.getWidth()) {
 	if(y >= 0 && y < image.getHeight()) {
 // loop visiting each pixel p at coordinate (i,j) in A(x,y) 
-   for (int i=0;i<image.getWidth();i++) {
-	   for(int j=0;j<image.getHeight();j++) {  // <---- start a for loop for j here 
+		
+   for (int i=x-size;i<x+size;i++) {
+	   for(int j=y-size;j<y+size;j++) {  // <---- start a for loop for j here 
        // now apply IMGTRANS as per instructions 
-             /*       
+                  
+//	       I=i;
+//	       J=-j;
+//	       X=x;
+//	       Y=-y;
+//	       
+//	       x=I-X;
+//	       y=J-X;
+		   
 		 // set values for O, D, P
-		 ?? 
+		 int O = x - size;
+		 int D = x + n;
+		 int P = x + size;
+		 
 		 
 		 // ensure that D lies between O and P (as n varies)
-		 // if n too large restrict D to P
-		 ??
+		 if(D <= P && D >= O) {
+			 
+		 }
+		// if n too large restrict D to P
+		 else if (D>P){
+			 D=P;
+		 }
+
 		 // spinner box allows n < 0; if so, reset n to 0
-		 ??
+		 if(n<0) n=0;
 
 		 // check IF i is between D and P
 		 // if so compute prei
+		 int prei;
+		 if( i >= D && i <= P) {
+			prei = i - size;
+		
+			int prep = temp.getRGB(prei, j);
+			image.setRGB(i,j, prep);
+			 System.out.println("hmm");
+		 }
+		 else {
+			 image.setRGB(i,j , 0xaaaaaa);
+			
+		 }
+		
+		
 		 // and hence get the prep pixel RGB and set the p pixel RGB
+		 
 		 // IF not make pixel (i,j) grey with 0xaaaaaa
-		 ?? 
 
+		 
           // <--- end forLoop j here 
    	} // end forLoop i
     } // end check that A(x,y) is in image 
 
------ template code commented out END */
 
- } // end method linearBox
+	}
+}
+}// end method linearBox
 
 // ---- END linearBox
 
